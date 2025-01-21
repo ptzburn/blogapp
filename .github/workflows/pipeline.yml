@@ -54,6 +54,7 @@ jobs:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           multipleDeployment: false
+        id: deploy
       - name: Deploy Success
         if: ${{ steps.deploy.outcome == 'success' }}
         env:
