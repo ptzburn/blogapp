@@ -24,6 +24,8 @@ jobs:
           npm run install:all
           npm install
           npm ci
+          npm ci --prefix client
+          npm ci --prefix server
       - name: Check style
         run: npm run eslint
       - name: Build
