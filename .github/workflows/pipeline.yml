@@ -23,6 +23,7 @@ jobs:
         run: |
           npm run install:all
           npm install
+          npm ci
       - name: Check style
         run: npm run eslint
       - name: Build
