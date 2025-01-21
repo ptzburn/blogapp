@@ -47,6 +47,14 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 1
+      - name: Deploy app
+        if: ${{ github.event_name == 'push' && env.CONDITION == 'false' }}
+        uses: sws2apps/render-deployment@d091bd29255c83fd1110cf4cd099561179480c7b
+        with:
+          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+          apiKey: ${{ secrets.RENDER_API_KEY }}
+          multipleDeployment: false
+
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     needs: [simple_deployment_pipeline]
