@@ -1,0 +1,59 @@
+{
+  "name": "bloglist-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "install": "npm run install-client && npm run install-server && npm install",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "start": "npm --prefix server start",
+    "copy:dist": "rm -rf server/dist && cp -r client/dist server/dist",
+    "test:client": "cd client && npm run test",
+    "test:server": "cd server && npm run test",
+    "test": "npm run test:client && npm run test:server",
+    "build:client": "npm run build --prefix client",
+    "build": "npm run build:client && npm run copy:dist",
+    "eslint": "eslint './**/*.{js,jsx}'",
+    "format": "prettier --write './**/*.{js,jsx}'",
+    "prepare": "husky",
+    "test:e2e": "playwright test",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@stylistic/eslint-plugin-js": "^2.13.0",
+    "@types/node": "^22.10.7",
+    "@vitest/eslint-plugin": "^1.1.25",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-vitest": "^0.5.4",
+    "eslint-plugin-vitest-globals": "^1.5.0",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.1",
+    "prettier": "3.4.2"
+  },
+  "overrides": {
+    "eslint": "^9.18.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint",
+      "prettier --write"
+    ]
+  }
+}
